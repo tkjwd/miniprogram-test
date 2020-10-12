@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container">
+
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
     <block wx:else>
@@ -7,8 +8,20 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+
   <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+    <button bindtap="clickMe">点击我</button>
+    <text class="user-motto" mode="cover">{{motto}}</text>
   </view>
-  <button bindtap="clickMe">点击我</button>
+
+  <button bindtap='getLocation'>获取位置</button>
+  <view wx:if="{{latitude !=''}}">
+    <view>纬度:{{latitude}}</view>
+    <view>经度:{{longitude}}</view>
+    <view>速度:{{speed}}</view>
+    <view>位置的精确度:{{accuracy}}</view>
+    <view>高度:{{altitude}}</view>
+    <view>垂直精度:{{accuracy}}</view>
+    <view>水平精度:{{accuracy}}</view>
+  </view>
 </view>

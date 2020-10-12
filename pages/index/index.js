@@ -5,6 +5,13 @@ const app = getApp()
 Page({
   data: {
     //motto: {},
+    latitude: '',
+    longitude: '',
+    speed: '',
+    accuracy: '',
+    altitude:'',
+    verticalAccuracy: '',
+    horizontalAccuracy:'',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -55,5 +62,39 @@ Page({
     this.setData({
       motto:'欢迎来到上下链群接龙！'
     })
+  },
+  getLocation:function(){
+    var _this=this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var speed = res.speed
+        var accuracy = res.accuracy
+        var altitude = res.altitude
+        var verticalAccuracy = res.verticalAccuracy
+        var horizontalAccuracy = res.horizontalAccuracy
+        _this.setData({
+          latitude: latitude,
+          longitude: longitude,
+          speed: speed,
+          accuracy: accuracy,
+          altitude: altitude,
+          verticalAccuracy: verticalAccuracy,
+          horizontalAccuracy: horizontalAccuracy
+        })
+      }
+    })
+  },
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '自定义转发标题',
+      path: '/page/index/index'
+    }
   }
 })
